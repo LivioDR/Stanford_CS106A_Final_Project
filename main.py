@@ -15,7 +15,7 @@ def main():
     total_time_secs["long_break"] = ask_user_for_time("long break")
 
     # Start the Pomodoro timer with a work cycle
-    current_cycle = "break"
+    current_cycle = "work"
     work_cycles_count = 0 # this will keep count of work cycles completed to select the type of break
 
     while True:
@@ -62,7 +62,7 @@ def start_cycle(current_cycle, total_time_secs):
         
         # Logic for work messages
         if current_cycle == "work":
-            print("You've got this! Keep working!", end=' ') # printing without a new line
+            print("You've got this! Keep working!", end=" ") # printing without a new line
 
             # Display the work animation based on elapsed time
             if elapsed_time % work_animation_length < ANIMATION_FRAME_TIME:
@@ -77,24 +77,15 @@ def start_cycle(current_cycle, total_time_secs):
             print("Time for a break! Relax and recharge!", end=" ") # printing without a new line
 
             # Display the break animation based on elapsed time
-            if elapsed_time < ANIMATION_FRAME_TIME:
-                print(break_animation[0])
-            elif elapsed_time < 2 * ANIMATION_FRAME_TIME:
-                print(break_animation[1])
-            elif elapsed_time < 3 * ANIMATION_FRAME_TIME:
-                print(break_animation[2])
-            elif (elapsed_time % (2 * ANIMATION_FRAME_TIME) - ANIMATION_FRAME_TIME) >= 0:
-                print(break_animation[3])
-            else:
-                print(break_animation[4])
-
+            print_break_animation(break_animation, elapsed_time, ANIMATION_FRAME_TIME)
 
         elif current_cycle == "long_break":
-            print("Enjoy your long break! You deserve it!")
+            print("Enjoy your long break! You deserve it!", end=" ")
+            print_break_animation(break_animation, elapsed_time, ANIMATION_FRAME_TIME/2)  # Faster animation for long breaks
         
         print_elapsed_time(elapsed_time)
         print_progress_bar(elapsed_time, total_time_secs)
-        time.sleep(1)
+        time.sleep(1) # update every second
         clear_console()
 
 
@@ -107,7 +98,7 @@ def ask_user_for_time(category):
             if user_input <= 0:
                 print("Please enter a positive value.")
         except ValueError:
-            print("Invalid input. Please enter a number.")
+            print("Invalid input. Please enter a integer.")
     return user_input * 60  # Convert minutes to seconds
 
 def clear_console():
@@ -128,6 +119,19 @@ def print_progress_bar(current, total, bar_length = 50):
 def print_elapsed_time(elapsed):
     minutes, seconds = divmod(elapsed, 60)
     print(f"Elapsed time: {minutes:02}min {seconds:02}sec")
+
+def print_break_animation(break_animation, elapsed_time, frame_time):
+    # Display the break animation based on elapsed time
+    if elapsed_time < frame_time:
+        print(break_animation[0])
+    elif elapsed_time < 2 * frame_time:
+        print(break_animation[1])
+    elif elapsed_time < 3 * frame_time:
+        print(break_animation[2])
+    elif (elapsed_time % (2 * frame_time) - frame_time) >= 0:
+        print(break_animation[3])
+    else:
+        print(break_animation[4])
 
 
 if __name__ == "__main__":
