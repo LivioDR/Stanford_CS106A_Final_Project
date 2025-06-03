@@ -16,9 +16,9 @@ def print_progress_bar(current, total, bar_length = 50):
 
     print(bar)
 
-def print_elapsed_time(elapsed):
-    minutes, seconds = divmod(elapsed, 60)
-    print(f"Elapsed time: {minutes:02}min {seconds:02}sec")
+def print_remaining_time(elapsed, total):
+    minutes, seconds = divmod((total-elapsed), 60)
+    print(f"Remaining time: {minutes:02}min {seconds:02}sec")
 
 
 def print_work_animation(elapsed_time, frame_time):

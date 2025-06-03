@@ -1,5 +1,5 @@
 import time
-from display_functions import clear_console, print_progress_bar, print_elapsed_time, print_work_animation, print_break_animation
+from display_functions import clear_console, print_progress_bar, print_remaining_time, print_work_animation, print_break_animation
 
 def main():
 
@@ -73,8 +73,8 @@ def start_cycle(current_cycle, total_time_secs):
             print_break_animation(elapsed_time, ANIMATION_FRAME_TIME/2)  # Faster animation for long breaks
         
         # Print the elapsed time and progress bar
-        print_elapsed_time(elapsed_time)
         print_progress_bar(elapsed_time, total_time_secs)
+        print_remaining_time(elapsed_time, total_time_secs)
 
         # Sleep for 1 second to wait for the passage of time
         time.sleep(1)
