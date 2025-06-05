@@ -4,6 +4,17 @@ import os
 def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def print_intro_text():
+    SEPARATOR = "_" * 100 + "\n"
+
+    intro_text = """
+Welcome to the Pomodoro Timer!
+This tool will help you manage your time effectively using the Pomodoro Technique.
+You can customize your work and break intervals.
+After each work session, you'll take a short break, and after a few cycles, you'll take a longer break.
+Let's get started! \n"""
+    print(SEPARATOR + intro_text + SEPARATOR)
+
 def print_progress_bar(current, total, bar_length = 50):
     if total <= 0:
         percent = 100

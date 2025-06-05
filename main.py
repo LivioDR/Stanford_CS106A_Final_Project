@@ -1,5 +1,5 @@
 import time
-from display_functions import clear_console, print_progress_bar, print_remaining_time, print_work_animation, print_break_animation
+from display_functions import clear_console, print_intro_text, print_progress_bar, print_remaining_time, print_work_animation, print_break_animation
 
 def main():
 
@@ -9,6 +9,10 @@ def main():
         "break": 0,
         "long_break": 0
     }
+
+    clear_console()  # Clear the console before starting
+    # Explain the purpose of the command line app to the user
+    print_intro_text()
 
     # Ask the user to input the times for each category
     total_time_secs["work"] = ask_user_for_time("work routine")
